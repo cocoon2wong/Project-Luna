@@ -2,7 +2,7 @@
 @Author: Conghao Wong
 @Date: 2022-08-01 17:35:49
 @LastEditors: Conghao Wong
-@LastEditTime: 2022-08-01 18:40:58
+@LastEditTime: 2022-08-01 19:49:38
 @Description: file content
 @Github: https://github.com/cocoon2wong
 @Copyright 2022 Conghao Wong, All Rights Reserved.
@@ -63,10 +63,10 @@ class SDDClips(dataset.VideoClip):
 
         return dict(name=self.name,
                     dataset=self.dataset,
-                    annpath=self.SOURCE_FILE,
+                    annpath=self.TARGET_FILE,
                     order=CLIP_CONFIG['order'],
                     paras=CLIP_CONFIG['paras'],
-                    video_path=CLIP_CONFIG['video_path'],
+                    video_path=CLIP_CONFIG['video_path'].format(self.scene, self.scene_id),
                     matrix=CLIP_CONFIG['weights'],
                     datasetInfo=self.datasetInfo)
 
