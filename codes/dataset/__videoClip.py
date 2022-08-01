@@ -2,7 +2,7 @@
 @Author: Conghao Wong
 @Date: 2022-08-01 15:42:08
 @LastEditors: Conghao Wong
-@LastEditTime: 2022-08-01 18:20:09
+@LastEditTime: 2022-08-01 20:11:13
 @Description: file content
 @Github: https://github.com/cocoon2wong
 @Copyright 2022 Conghao Wong, All Rights Reserved.
@@ -14,6 +14,22 @@ from ..utils import dir_check, load_from_plist, write_plist
 
 
 class VideoClip():
+    """
+    VideoClip
+    ---------
+    Base structure for controlling each video dataset.
+
+    Properties
+    -----------------
+    ```python
+    >>> self.annpath        # dataset annotation file
+    >>> self.dimension      # annotation dimension
+    >>> self.matrix         # transfer matrix from real scales to pixels
+    >>> self.name           # video clip name
+    >>> self.paras          # [sample_step, frame_rate]
+    >>> self.video_path     # video path    
+    ```
+    """
 
     # Dataset annotation files
     PROCESSED_FILE = 'ann.csv'

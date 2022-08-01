@@ -2,7 +2,7 @@
 @Author: Conghao Wong
 @Date: 2022-08-01 15:34:30
 @LastEditors: Conghao Wong
-@LastEditTime: 2022-08-01 18:18:46
+@LastEditTime: 2022-08-01 20:31:10
 @Description: file content
 @Github: https://github.com/cocoon2wong
 @Copyright 2022 Conghao Wong, All Rights Reserved.
@@ -10,8 +10,7 @@
 
 import os
 
-from codes.utils import dir_check, write_plist
-
+from ..utils import dir_check, write_plist
 from .__videoClip import VideoClip
 
 
