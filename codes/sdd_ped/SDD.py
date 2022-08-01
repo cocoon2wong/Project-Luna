@@ -2,7 +2,7 @@
 @Author: Conghao Wong
 @Date: 2022-08-01 17:35:49
 @LastEditors: Conghao Wong
-@LastEditTime: 2022-08-01 18:30:52
+@LastEditTime: 2022-08-01 18:40:58
 @Description: file content
 @Github: https://github.com/cocoon2wong
 @Copyright 2022 Conghao Wong, All Rights Reserved.
@@ -25,8 +25,7 @@ class SDDClips(dataset.VideoClip):
                  video_path: str = None, matrix: list[float] = None,
                  datasetInfo=None, *args, **kwargs):
 
-        new_name = name + '_ped'
-        super().__init__(new_name, dataset, annpath, order, paras,
+        super().__init__(name, dataset, annpath, order, paras,
                          video_path, matrix, datasetInfo, *args, **kwargs)
 
         self.scene = re.findall('[a-zA-Z]+', name)[0]
@@ -84,6 +83,7 @@ class SDDDataset(dataset.Dataset):
                          anntype=ANNTYPE)
 
         self.set_videoClip_type(SDDClips)
+        self.subsets = SUBSETS
 
     def get_splits(self):
         """

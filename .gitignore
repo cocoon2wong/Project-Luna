@@ -1,3 +1,7 @@
 .DS_Store
 .vscode
 __pycache__
+
+# processed dataset files
+dataset_processed
+dataset_configs

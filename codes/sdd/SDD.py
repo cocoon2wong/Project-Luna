@@ -2,7 +2,7 @@
 @Author: Conghao Wong
 @Date: 2022-08-01 17:35:49
 @LastEditors: Conghao Wong
-@LastEditTime: 2022-08-01 18:21:47
+@LastEditTime: 2022-08-01 18:34:30
 @Description: file content
 @Github: https://github.com/cocoon2wong
 @Copyright 2022 Conghao Wong, All Rights Reserved.
@@ -80,6 +80,7 @@ class SDDDataset(dataset.Dataset):
                          anntype=ANNTYPE)
 
         self.set_videoClip_type(SDDClips)
+        self.subsets = SUBSETS
 
     def get_splits(self):
         """
