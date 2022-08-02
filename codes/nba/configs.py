@@ -2,7 +2,7 @@
 @Author: Conghao Wong
 @Date: 2022-08-01 18:44:59
 @LastEditors: Conghao Wong
-@LastEditTime: 2022-08-02 09:12:12
+@LastEditTime: 2022-08-02 10:45:57
 @Description: file content
 @Github: https://github.com/cocoon2wong
 @Copyright 2022 Conghao Wong, All Rights Reserved.
@@ -19,7 +19,7 @@ SPLIT_NAME = 'nba4000'
 CLIP_CONFIG = dict(
     order=[0, 1],
     paras=[10, 25],
-    video_path='null',
+    video_path='./dataset_original/NBA/court.png',
     weights=[1.0, 0.0, 1.0, 0.0],
 )
 
