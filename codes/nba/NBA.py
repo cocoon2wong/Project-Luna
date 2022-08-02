@@ -2,7 +2,7 @@
 @Author: Conghao Wong
 @Date: 2022-08-01 18:45:05
 @LastEditors: Conghao Wong
-@LastEditTime: 2022-08-02 09:37:51
+@LastEditTime: 2022-08-02 11:13:27
 @Description: file content
 @Github: https://github.com/cocoon2wong
 @Copyright 2022 Conghao Wong, All Rights Reserved.
@@ -13,7 +13,7 @@ import random
 
 import py7zr
 
-from NBA.Game import EventError, Game
+from NBA.codes.Game import EventError, Game
 
 from .. import dataset
 from ..utils import dir_check, load_from_plist
