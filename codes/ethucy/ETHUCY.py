@@ -2,7 +2,7 @@
 @Author: Conghao Wong
 @Date: 2022-08-01 16:05:26
 @LastEditors: Conghao Wong
-@LastEditTime: 2022-08-01 19:04:19
+@LastEditTime: 2022-08-02 11:41:40
 @Description: file content
 @Github: https://github.com/cocoon2wong
 @Copyright 2022 Conghao Wong, All Rights Reserved.
@@ -34,7 +34,6 @@ class ETHUCYClips(dataset.VideoClip):
 
         config = CLIP_CONFIGS[self.name]
         weights = [1.0, 0.0, 1.0, 0.0]
-        order = config['order']
 
         result = np.column_stack([
             weights[0] * r.T[0] + weights[1],
@@ -43,8 +42,8 @@ class ETHUCYClips(dataset.VideoClip):
 
         dat = np.column_stack([data_original[0].astype(int).astype(str),
                                data_original[1].astype(int).astype(str),
-                               result.T[order[0]].astype(str),
-                               result.T[order[1]].astype(str)])
+                               result.T[1].astype(str),
+                               result.T[0].astype(str)])
 
         with open(self.TARGET_FILE, 'w+') as f:
             for _dat in dat:
@@ -55,7 +54,7 @@ class ETHUCYClips(dataset.VideoClip):
         return dict(name=self.name,
                     dataset=self.dataset,
                     annpath=self.TARGET_FILE,
-                    order=order,
+                    order=config['order'],
                     paras=config['paras'],
                     video_path=config['video_path'],
                     matrix=config['weights'],
