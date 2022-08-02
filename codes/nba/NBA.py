@@ -208,6 +208,7 @@ class NBADataset(dataset.Dataset):
         Split from Simaug
         """
         event_names = [clip.name for clip in self.clips]
+        random.shuffle(event_names)
         train_number = int(TRAIN_PERCENT * len(event_names))
         val_number = int(VAL_PERCENT * (len(event_names) - train_number))
 
