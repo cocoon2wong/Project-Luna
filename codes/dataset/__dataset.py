@@ -2,7 +2,7 @@
 @Author: Conghao Wong
 @Date: 2022-08-01 15:34:30
 @LastEditors: Conghao Wong
-@LastEditTime: 2022-08-01 20:31:10
+@LastEditTime: 2022-08-02 10:17:31
 @Description: file content
 @Github: https://github.com/cocoon2wong
 @Copyright 2022 Conghao Wong, All Rights Reserved.
@@ -15,6 +15,12 @@ from .__videoClip import VideoClip
 
 
 class Dataset():
+    """
+    Dataset
+    -------
+    Manage a full trajectory prediction dataset.
+    A dataset may contains several video clips.
+    """
 
     VideoClipType = VideoClip
 
@@ -78,7 +84,8 @@ class Dataset():
     @property
     def name(self) -> str:
         """
-        Name of the dataset.
+        Name of the video dataset.
+        For example, `ETH-UCY` or `SDD`.
         """
         return self.__name
 
@@ -107,7 +114,8 @@ class Dataset():
     @property
     def dimension(self) -> int:
         """
-        Dimension of annotations.
+        Maximum dimension of trajectories recorded in this dataset.
+        For example, `(x, y)` -> `dimension = 2`.
         """
         return self.__dimension
 
