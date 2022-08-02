@@ -2,7 +2,7 @@
 @Author: Conghao Wong
 @Date: 2022-08-01 18:45:05
 @LastEditors: Conghao Wong
-@LastEditTime: 2022-08-02 09:12:29
+@LastEditTime: 2022-08-02 09:37:51
 @Description: file content
 @Github: https://github.com/cocoon2wong
 @Copyright 2022 Conghao Wong, All Rights Reserved.
@@ -38,12 +38,19 @@ class NBAClips(dataset.VideoClip):
         self.SOURCE_FILE = self.SOURCE_FILE.format(self.game_id)
 
     def transfer_annotations(self, game: Game):
-        game_id = game.game_name
         fname = self.TARGET_FILE
+        config_dic = dict(name=self.name,
+                          dataset=self.dataset,
+                          annpath=self.TARGET_FILE,
+                          order=CLIP_CONFIG['order'],
+                          paras=CLIP_CONFIG['paras'],
+                          video_path=CLIP_CONFIG['video_path'],
+                          matrix=CLIP_CONFIG['weights'],
+                          datasetInfo=self.datasetInfo)
 
         if os.path.exists(fname):
             print(f'Dataset file {fname} exists, skip.')
-            return 1
+            return config_dic
         else:
             fdir = os.path.dirname(fname)
             dir_check(fdir)
@@ -98,14 +105,7 @@ class NBAClips(dataset.VideoClip):
 
         print(f'Dataset file {fname} saved.')
 
-        return dict(name=self.name,
-                    dataset=self.dataset,
-                    annpath=self.TARGET_FILE,
-                    order=CLIP_CONFIG['order'],
-                    paras=CLIP_CONFIG['paras'],
-                    video_path=CLIP_CONFIG['video_path'],
-                    matrix=CLIP_CONFIG['weights'],
-                    datasetInfo=self.datasetInfo)
+        return config_dic
 
     def get(self, game: Game):
         plist_path = self.CONFIG_FILE
