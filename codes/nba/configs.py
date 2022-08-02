@@ -2,7 +2,7 @@
 @Author: Conghao Wong
 @Date: 2022-08-01 18:44:59
 @LastEditors: Conghao Wong
-@LastEditTime: 2022-08-01 19:58:46
+@LastEditTime: 2022-08-02 09:12:12
 @Description: file content
 @Github: https://github.com/cocoon2wong
 @Copyright 2022 Conghao Wong, All Rights Reserved.
@@ -14,6 +14,7 @@ SCALE = 1.0
 SCALE_VIS = 1.0
 DIMENSION = 2
 ANNTYPE = 'coordinate'
+SPLIT_NAME = 'nba4000'
 
 CLIP_CONFIG = dict(
     order=[0, 1],
@@ -35,7 +36,7 @@ SAMPLE_STEP_MS = int(SAMPLE_STEP * 1000)
 
 QUARTER = 12 * 60
 MIN_EVENT_LEN = 9.0
-MAX_EVENT_NUMBER = 6000
+MAX_EVENT_NUMBER = 4000
 
 TRAIN_PERCENT = 0.7
 VAL_PERCENT = 0.3

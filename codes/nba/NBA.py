@@ -2,7 +2,7 @@
 @Author: Conghao Wong
 @Date: 2022-08-01 18:45:05
 @LastEditors: Conghao Wong
-@LastEditTime: 2022-08-01 19:59:08
+@LastEditTime: 2022-08-02 09:12:29
 @Description: file content
 @Github: https://github.com/cocoon2wong
 @Copyright 2022 Conghao Wong, All Rights Reserved.
@@ -215,4 +215,4 @@ class NBADataset(dataset.Dataset):
         val_sets = event_names[train_number:train_number+val_number]
         test_sets = event_names[train_number+val_number:]
 
-        return [[train_sets, test_sets, val_sets, 'nba6000']]
+        return [[train_sets, test_sets, val_sets, SPLIT_NAME]]
