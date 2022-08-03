@@ -2,7 +2,7 @@
 @Author: Conghao Wong
 @Date: 2022-08-01 18:44:59
 @LastEditors: Conghao Wong
-@LastEditTime: 2022-08-02 15:41:16
+@LastEditTime: 2022-08-02 16:08:25
 @Description: file content
 @Github: https://github.com/cocoon2wong
 @Copyright 2022 Conghao Wong, All Rights Reserved.
@@ -10,11 +10,11 @@
 
 DATASET = 'NBA'
 TYPE = 'meter'
-SCALE = 1.0
+SCALE = 4.0
 SCALE_VIS = 1.0
 DIMENSION = 2
 ANNTYPE = 'coordinate'
-SPLIT_NAME = 'nba1500'
+SPLIT_NAME = 'nba1000'
 
 CLIP_CONFIG = dict(
     order=[1, 0],
@@ -36,7 +36,7 @@ SAMPLE_STEP_MS = int(SAMPLE_STEP * 1000)
 
 QUARTER = 12 * 60
 MIN_EVENT_LEN = 9.0
-MAX_EVENT_NUMBER = 1500
+MAX_EVENT_NUMBER = 1000
 
 TRAIN_PERCENT = 0.7
 VAL_PERCENT = 0.3

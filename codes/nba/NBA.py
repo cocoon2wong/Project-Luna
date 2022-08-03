@@ -2,7 +2,7 @@
 @Author: Conghao Wong
 @Date: 2022-08-01 18:45:05
 @LastEditors: Conghao Wong
-@LastEditTime: 2022-08-02 11:13:27
+@LastEditTime: 2022-08-02 16:44:09
 @Description: file content
 @Github: https://github.com/cocoon2wong
 @Copyright 2022 Conghao Wong, All Rights Reserved.
@@ -97,8 +97,8 @@ class NBAClips(dataset.VideoClip):
                 _n = event.player_ids_dict[player.id][0]
                 name = '{} {}'.format(_t, _n).replace(' ', '_')
                 lines.append(line.format(frame_id, name,
-                                         player.x, player.y,
-                                         player.team))
+                                         player.x/SCALE, player.y/SCALE,
+                                         player.team.name))
 
         with open(fname, 'w+') as f:
             f.writelines(lines)
