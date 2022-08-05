@@ -1,3 +1,6 @@
 [submodule "NBA"]
 	path = NBA
 	url = https://github.com/cocoon2wong/NBA-Player-Movements
+[submodule "nuScenes"]
+	path = nuScenes
+	url = https://github.com/cocoon2wong/nuscenes-devkit.git
