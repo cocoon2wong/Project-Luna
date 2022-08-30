@@ -2,7 +2,7 @@
 @Author: Conghao Wong
 @Date: 2022-08-01 17:35:49
 @LastEditors: Conghao Wong
-@LastEditTime: 2022-08-01 19:49:38
+@LastEditTime: 2022-08-30 09:24:03
 @Description: file content
 @Github: https://github.com/cocoon2wong
 @Copyright 2022 Conghao Wong, All Rights Reserved.
@@ -58,8 +58,6 @@ class SDDClips(dataset.VideoClip):
         dat = np.array(dat, dtype=str)
         with open(self.TARGET_FILE, 'w+') as f:
             f.writelines([','.join(item)+'\n' for item in dat])
-
-        print('{} Done.'.format(self.TARGET_FILE))
 
         return dict(name=self.name,
                     dataset=self.dataset,

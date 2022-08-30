@@ -2,7 +2,7 @@
 @Author: Conghao Wong
 @Date: 2022-08-01 16:05:26
 @LastEditors: Conghao Wong
-@LastEditTime: 2022-08-02 11:41:40
+@LastEditTime: 2022-08-30 09:23:51
 @Description: file content
 @Github: https://github.com/cocoon2wong
 @Copyright 2022 Conghao Wong, All Rights Reserved.
@@ -48,8 +48,6 @@ class ETHUCYClips(dataset.VideoClip):
         with open(self.TARGET_FILE, 'w+') as f:
             for _dat in dat:
                 f.writelines([','.join(_dat)+',Pedestrain,\n'])
-
-        print('{} Done.'.format(self.TARGET_FILE))
 
         return dict(name=self.name,
                     dataset=self.dataset,

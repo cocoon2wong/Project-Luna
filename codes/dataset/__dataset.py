@@ -2,7 +2,7 @@
 @Author: Conghao Wong
 @Date: 2022-08-01 15:34:30
 @LastEditors: Conghao Wong
-@LastEditTime: 2022-08-02 10:17:31
+@LastEditTime: 2022-08-30 14:45:49
 @Description: file content
 @Github: https://github.com/cocoon2wong
 @Copyright 2022 Conghao Wong, All Rights Reserved.
@@ -42,19 +42,24 @@ class Dataset():
         self.__dimension = dimension
         self.__anntype = anntype
 
+        self.subsets: list[str] = []
         self.clips: list[VideoClip] = []
         self.CONFIG_FILE = self.CONFIG_FILE.format(self.name, '{}')
 
         config_dir = os.path.dirname(self.CONFIG_FILE)
         dir_check(config_dir)
+        self.get_subset_list()
 
     def set_videoClip_type(self, new_type: type[VideoClip]):
         self.VideoClipType = new_type
 
-    def add_clips(self, clips: list[str], force_update=False):
+    def add_clips(self, clips: list[str], force_update=False, datasetInfo=None):
+        if datasetInfo is None:
+            datasetInfo = self
+
         for clip in clips:
             vc = self.VideoClipType(name=clip, dataset=self.name,
-                                    datasetInfo=self)
+                                    datasetInfo=datasetInfo)
             vc.force_update = force_update
             self.clips.append(vc.get())
 
@@ -65,6 +70,15 @@ class Dataset():
     def get_splits(self):
         raise NotImplementedError(
             'Please re-write this method when subclassing.')
+
+    def get_subset_list(self):
+        for split in self.get_splits():
+            for item in split[:-1]:
+                for set in item:
+                    if not set in self.subsets:
+                        self.subsets.append(set)
+
+        self.subsets.sort()
 
     def save_splits_info(self):
         for split in self.get_splits():

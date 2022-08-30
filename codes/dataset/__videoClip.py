@@ -2,7 +2,7 @@
 @Author: Conghao Wong
 @Date: 2022-08-01 15:42:08
 @LastEditors: Conghao Wong
-@LastEditTime: 2022-08-01 20:11:13
+@LastEditTime: 2022-08-30 09:22:45
 @Description: file content
 @Github: https://github.com/cocoon2wong
 @Copyright 2022 Conghao Wong, All Rights Reserved.
@@ -132,8 +132,11 @@ class VideoClip():
 
         if self.force_update or not os.path.exists(plist_path):
             dic = self.transfer_annotations()
+            print(f'Transfer annotation file {self.TARGET_FILE} done.')
         else:
             dic = load_from_plist(plist_path)
+            dic['datasetInfo'] = self.datasetInfo
+            print(f'Load annotation file {self.TARGET_FILE} done.')
 
         self.__init__(**dic)
         return self
