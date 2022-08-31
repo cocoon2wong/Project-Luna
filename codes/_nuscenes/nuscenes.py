@@ -2,11 +2,13 @@
 @Author: Conghao Wong
 @Date: 2022-08-05 10:40:20
 @LastEditors: Conghao Wong
-@LastEditTime: 2022-08-30 14:42:14
+@LastEditTime: 2022-08-31 20:41:19
 @Description: file content
 @Github: https://github.com/cocoon2wong
 @Copyright 2022 Conghao Wong, All Rights Reserved.
 """
+
+import random
 
 import numpy as np
 
@@ -18,6 +20,8 @@ from .configs import *
 
 
 class NuScenesClips(dataset.VideoClip):
+
+    only_vehicle = False
 
     def __init__(self, name: str, dataset: str, annpath: str = None,
                  order: tuple[int, int] = None, paras: tuple[int, int] = None,
@@ -33,7 +37,8 @@ class NuScenesClips(dataset.VideoClip):
         dat = []
         scale = self.datasetInfo.scale
 
-        scene_token = self.ds.field2token('scene', 'name', self.name)[0]
+        scene_token = self.ds.field2token('scene', 'name',
+                                          self.name.split('_ov')[0])[0]
         scene = self.ds.get('scene', scene_token)
 
         sample = self.ds.get('sample', scene['first_sample_token'])
@@ -45,22 +50,18 @@ class NuScenesClips(dataset.VideoClip):
                 ann = self.ds.get('sample_annotation', ann_token)
                 category = ann['category_name']
 
-                try:
-                    attribute_token = ann['attribute_tokens'][0]
-                    attribute = self.ds.get('attribute', attribute_token)
-                    attribute_name = attribute['name']
-                except:
-                    continue
-
-                if 'pedestrain' in category:
-                    for s in ['stroller', 'wheelchair']:
-                        if s in category:
-                            continue
+                if 'pedestrian' in category:
+                    if self.only_vehicle:
+                        continue
 
                 elif 'vehicle' in category:
-                    for s in ['bicycle', 'motorcycle']:
-                        if s in category:
-                            continue
+                    try:
+                        attribute_token = ann['attribute_tokens'][0]
+                        attribute = self.ds.get('attribute', attribute_token)
+                        attribute_name = attribute['name']
+                    except:
+                        continue
+
                     if 'parked' in attribute_name:
                         continue
 
@@ -91,7 +92,7 @@ class NuScenesClips(dataset.VideoClip):
                         (x-a/2)/scale, (y-b/2)/scale, (z-c/2)/scale,
                         (x+a/2)/scale, (y+b/2)/scale, (z+c/2)/scale,
                         r0, r1, r2, r3,
-                        'CAM_FRONT'])
+                        EGO_AGENT_TYPE])
 
             sample = self.ds.get('sample', sample['next'])
             frame_id += 1
@@ -130,14 +131,19 @@ class NuScenesDataset(dataset.Dataset):
 
     def get_splits(self):
         splits = create_splits_scenes()
+
         if self.miniSplit:
-            s = [[splits['mini_train'],
-                  splits['mini_val'],
-                  splits['mini_val'],
-                  'nuScenes_mini']]
+            train = splits['mini_train']
+            val = splits['mini_val']
+            split_name = 'nuScenes_mini'
+
         else:
-            s = [[splits['train'],
-                  splits['test'],
-                  splits['val'],
-                  'nuScenes_v1.0']]
-        return s
+            train = splits['train']
+            val = splits['val']
+            split_name = 'nuScenes_v1.0'
+
+        # not that annotations of all test sets are not available
+        test_real = val
+        val_real = random.sample(train, int(VAL_RATIO * len(train)))
+        train_real = [d for d in train if not d in val_real]
+        return [[train_real, test_real, val_real, split_name]]

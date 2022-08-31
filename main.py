@@ -2,7 +2,7 @@
 @Author: Conghao Wong
 @Date: 2022-08-01 15:59:44
 @LastEditors: Conghao Wong
-@LastEditTime: 2022-08-31 11:08:22
+@LastEditTime: 2022-08-31 20:50:54
 @Description: file content
 @Github: https://github.com/cocoon2wong
 @Copyright 2022 Conghao Wong, All Rights Reserved.
@@ -30,15 +30,15 @@ if __name__ == '__main__':
     ds.save_clips_info()
     ds.save_splits_info()
 
-    # nuScenes
-    a = _nuscenes.NuScenesDataset(version='v1.0-trainval')
-    b = _nuscenes.NuScenesDataset(version='v1.0-test')
+    # nuScenes and nuScenes_ov
+    for nuSceneDataset in [
+        _nuscenes.NuScenesDataset,
+        # _nuscenes.NuscenesDataset_onlyVehicle
+    ]:
+        ds = nuSceneDataset(version='v1.0-trainval')
+        ds.add_clips(ds.subsets)
+        ds.save_clips_info()
 
-    train, test, val = a.get_splits()[0][:3]
-    a.add_clips(train + val)
-    a.add_clips(test, datasetInfo=b)
-    a.save_clips_info()
-
-    for _ in [0, 1]:
-        a.save_splits_info()
-        a.miniSplit = True
+        for _ in [0, 1]:
+            ds.save_splits_info()
+            ds.miniSplit = True

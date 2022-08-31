@@ -2,13 +2,13 @@
 @Author: Conghao Wong
 @Date: 2022-08-05 10:40:10
 @LastEditors: Conghao Wong
-@LastEditTime: 2022-08-31 20:18:49
+@LastEditTime: 2022-08-31 20:18:52
 @Description: file content
 @Github: https://github.com/cocoon2wong
 @Copyright 2022 Conghao Wong, All Rights Reserved.
 """
 
-DATASET = 'nuScenes'
+DATASET = 'nuScenes_ov'
 TYPE = 'meter'
 SCALE = 1.0
 SCALE_VIS = 1.0
