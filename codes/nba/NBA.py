@@ -66,7 +66,7 @@ class NBAClips(dataset.VideoClip):
         quarter_clock_ms = int(1000 * quarter_clock)
 
         lines = []
-        line = '{},{},{},{},{},\n'
+        line = '{},{},{},{},{}\n'
 
         try:
             event_time_len = event.moments[0].game_clock - \
@@ -93,9 +93,7 @@ class NBAClips(dataset.VideoClip):
                 continue
 
             for player in moment.players:
-                _t = player.team.name
-                _n = event.player_ids_dict[player.id][0]
-                name = '{} {}'.format(_t, _n).replace(' ', '_')
+                name = event.player_ids_dict[player.id][0]
                 lines.append(line.format(frame_id, name,
                                          player.x/SCALE, player.y/SCALE,
                                          player.team.name))

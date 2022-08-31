@@ -2,7 +2,7 @@
 @Author: Conghao Wong
 @Date: 2022-08-01 17:35:49
 @LastEditors: Conghao Wong
-@LastEditTime: 2022-08-30 09:24:03
+@LastEditTime: 2022-08-31 11:02:36
 @Description: file content
 @Github: https://github.com/cocoon2wong
 @Copyright 2022 Conghao Wong, All Rights Reserved.
@@ -48,7 +48,7 @@ class SDDClips(dataset.VideoClip):
                     continue
 
                 dat.append([split[5],                    # frame number
-                            split[0] + '_' + split[-1],  # name of the agent
+                            split[0],                    # name of the agent
                             float(split[2])/scale,
                             float(split[1])/scale,
                             float(split[4])/scale,
