@@ -2,7 +2,7 @@
 @Author: Conghao Wong
 @Date: 2022-08-05 10:40:20
 @LastEditors: Conghao Wong
-@LastEditTime: 2022-08-31 20:41:19
+@LastEditTime: 2023-03-21 10:33:46
 @Description: file content
 @Github: https://github.com/cocoon2wong
 @Copyright 2022 Conghao Wong, All Rights Reserved.
@@ -142,8 +142,14 @@ class NuScenesDataset(dataset.Dataset):
             val = splits['val']
             split_name = 'nuScenes_v1.0'
 
-        # not that annotations of all test sets are not available
-        test_real = val
+        # Note that annotations of all test sets are not available
+        # 150 test sets in v1.0
+        test_real = val 
+
+        # 150 val sets in v1.0
         val_real = random.sample(train, int(VAL_RATIO * len(train)))
+
+        # 550 train sets in v1.0
         train_real = [d for d in train if not d in val_real]
+        
         return [[train_real, test_real, val_real, split_name]]
