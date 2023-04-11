@@ -10,7 +10,7 @@ comments: true
  * @Author: Conghao Wong
  * @Date: 2023-03-21 17:52:21
  * @LastEditors: Conghao Wong
- * @LastEditTime: 2023-04-11 20:36:45
+ * @LastEditTime: 2023-04-11 20:42:09
  * @Description: file content
  * @Github: https://cocoon2wong.github.io
  * Copyright 2023 Conghao Wong, All Rights Reserved.
@@ -19,6 +19,6 @@ comments: true
 <link rel="stylesheet" type="text/css" href="/assets/css/user.css">
 
 <div style="text-align: center;">
-    <a class="btn btn-info btn-lg" href="/howToUse">💡 Steps to initialize dataset files</a>
+    <a class="btn btn-info btn-lg" href="/Project-Luna/howToUse">💡 Steps to initialize dataset files</a>
     <a class="btn btn-info btn-lg" href="/publications/index">💡 Dataset and split notes</a>
 </div>
