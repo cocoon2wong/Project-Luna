@@ -29,5 +29,13 @@
         "**/*.txt",
         "**/*.md"
     ],
-    "editor.unicodeHighlight.nonBasicASCII": true
+    "editor.unicodeHighlight.nonBasicASCII": true,
+    "colorize.include": [
+        "**/*.yml",
+        "**/*.css",
+        "**/*.scss",
+        "**/*.sass",
+        "**/*.less",
+        "**/*.styl"
+    ]
 }
