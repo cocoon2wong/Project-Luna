@@ -7,7 +7,7 @@ title: Steps to Initialize Dataset Files
  * @Author: Conghao Wong
  * @Date: 2023-03-21 17:52:21
  * @LastEditors: Conghao Wong
- * @LastEditTime: 2023-04-11 20:48:42
+ * @LastEditTime: 2023-04-12 09:20:28
  * @Description: file content
  * @Github: https://cocoon2wong.github.io
  * Copyright 2023 Conghao Wong, All Rights Reserved.
@@ -53,6 +53,9 @@ In order for these different dataset files to be used in our training structure,
 
 {: .box-note}
 **Note:** Make sure you have navigated to the root path of the dataset repo before running the following steps.
+
+{: .box-note}
+**Note:** For dataset split and settings, please refer to [HERE](/Project-Luna/notes).
 
 #### (a) ETH-UCY and SDD
 
