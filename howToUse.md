@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: pageWithLink
 title: Steps to Initialize Dataset Files
 # cover-img: /assets/img/2022-03-03/cat.jpeg
 ---
@@ -7,7 +7,7 @@ title: Steps to Initialize Dataset Files
  * @Author: Conghao Wong
  * @Date: 2023-03-21 17:52:21
  * @LastEditors: Conghao Wong
- * @LastEditTime: 2023-04-12 09:20:28
+ * @LastEditTime: 2023-04-13 14:09:43
  * @Description: file content
  * @Github: https://cocoon2wong.github.io
  * Copyright 2023 Conghao Wong, All Rights Reserved.

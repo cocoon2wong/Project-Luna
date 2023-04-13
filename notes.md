@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: pageWithLink
 title: Dataset and Split Notes
 # cover-img: /assets/img/2022-03-03/cat.jpeg
 ---
@@ -7,7 +7,7 @@ title: Dataset and Split Notes
  * @Author: Conghao Wong
  * @Date: 2023-04-11 20:48:08
  * @LastEditors: Conghao Wong
- * @LastEditTime: 2023-04-11 20:51:27
+ * @LastEditTime: 2023-04-13 14:09:48
  * @Description: file content
  * @Github: https://cocoon2wong.github.io
  * Copyright 2023 Conghao Wong, All Rights Reserved.
