@@ -10,13 +10,13 @@ comments: true
  * @Author: Conghao Wong
  * @Date: 2023-03-21 17:52:21
  * @LastEditors: Conghao Wong
- * @LastEditTime: 2023-04-13 14:05:06
+ * @LastEditTime: 2023-04-13 18:11:19
  * @Description: file content
  * @Github: https://cocoon2wong.github.io
  * Copyright 2023 Conghao Wong, All Rights Reserved.
 -->
 
-<link rel="stylesheet" type="text/css" href="/assets/css/user.css">
+<link rel="stylesheet" type="text/css" href="./assets/css/user.css">
 
 ## Abstract
 
@@ -25,9 +25,9 @@ The code for this repository needs to be used along with a specific model's code
 Click on the guidelines button below to learn how to transform dataset files into the format needed for our training code.
 
 <div style="text-align: center;">
-    <a class="btn btn-info btn-lg" href="https://github.com/cocoon2wong/Project-Luna">🛠️ Codes</a>
-    <a class="btn btn-info btn-lg" href="/Project-Luna/howToUse">💡 Guidelines</a>
-    <a class="btn btn-info btn-lg" href="/Project-Luna/notes">⚠️ Dataset and Split Notes</a>
+    <a class="btn btn-colorful btn-lg" href="https://github.com/cocoon2wong/Project-Luna">🛠️ Codes</a>
+    <a class="btn btn-colorful btn-lg" href="./howToUse">💡 Guidelines</a>
+    <a class="btn btn-colorful btn-lg" href="./notes">⚠️ Dataset and Split Notes</a>
 </div>
 
 ## Target Dataset Format
