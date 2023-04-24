@@ -5,3 +5,6 @@ __pycache__
 # processed dataset files
 dataset_processed
 dataset_configs
+
+# Big dataset files
+Human3.6M/*
