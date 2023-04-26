@@ -7,7 +7,7 @@ title: Dataset and Split Notes
  * @Author: Conghao Wong
  * @Date: 2023-04-11 20:48:08
  * @LastEditors: Conghao Wong
- * @LastEditTime: 2023-04-13 14:09:48
+ * @LastEditTime: 2023-04-26 17:11:44
  * @Description: file content
  * @Github: https://cocoon2wong.github.io
  * Copyright 2023 Conghao Wong, All Rights Reserved.
@@ -36,3 +36,11 @@ Since the official test set in the nuScenes dataset has no labels, we use the fo
 - `150 Test sets`: We treat the official 150 val sets as our test sets.
 
 You can also change these split settings in `/dataset_original/codes/_nuscenes/nuscenes.py`.
+
+## Human3.6M
+
+---
+
+Following previous settings, we use all data from subjects `[1, 6, 7, 8, 9]` to train the model, subjects `[11]` to validate, and subjects `[5]` to test.
+
+When making the training samples, we sample observations with the frequency of `25Hz` (*i.e.*, the sample interval is `40ms`) and use `t_h = 10` frames (`400ms`) of observations from all subjects to predict their possible trajectories for the next `t_f = 10` frames (`400ms`).
