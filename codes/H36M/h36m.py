@@ -2,7 +2,7 @@
 @Author: Conghao Wong
 @Date: 2023-04-24 10:16:19
 @LastEditors: Conghao Wong
-@LastEditTime: 2023-04-24 20:56:02
+@LastEditTime: 2023-05-08 16:05:40
 @Description: file content
 @Github: https://cocoon2wong.github.io
 @Copyright 2023 Conghao Wong, All Rights Reserved.
@@ -87,11 +87,24 @@ class H36MDataset(dataset.Dataset):
                          anntype=ANNTYPE)
 
     def get_splits(self):
+        # main split
+        all_actions = np.arange(17)
+        train_list = [1, 6, 7, 8, 9]
+        test_list = [5]
+        val_list = [11]
 
-        # [train_subjects, test_subjects, val_subjects]
-        subjects = [[1, 6, 7, 8, 9], [5], [11]]
-        actions = np.arange(17)
+        main_train = self.ds.get_subsets_by_index(train_list, all_actions)
+        main_test = self.ds.get_subsets_by_index(test_list, all_actions)
+        main_val = self.ds.get_subsets_by_index(val_list, all_actions)
 
-        return [[self.ds.get_subsets_by_index(subjects[0], actions),
-                 self.ds.get_subsets_by_index(subjects[1], actions),
-                 self.ds.get_subsets_by_index(subjects[2], actions), 'h36m']]
+        splits = [[main_train, main_test, main_val, 'h36m']]
+
+        # Splits with different actions
+        # These splits are only used to test
+        for action in range(2, 17):
+            _train = self.ds.get_subsets_by_index(train_list, [action])
+            _test = self.ds.get_subsets_by_index(test_list, [action])
+            _val = self.ds.get_subsets_by_index(val_list, [action])
+            splits.append([_train, _test, _val, f'h36m_act_{action}'])
+
+        return splits
