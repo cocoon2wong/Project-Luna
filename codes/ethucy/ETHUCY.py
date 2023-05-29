@@ -2,7 +2,7 @@
 @Author: Conghao Wong
 @Date: 2022-08-01 16:05:26
 @LastEditors: Conghao Wong
-@LastEditTime: 2022-08-30 09:23:51
+@LastEditTime: 2023-05-29 16:23:52
 @Description: file content
 @Github: https://github.com/cocoon2wong
 @Copyright 2022 Conghao Wong, All Rights Reserved.
@@ -11,12 +11,15 @@
 import numpy as np
 
 from .. import dataset
+from ..utils import RGB_IMG, SEG_IMG
 from .configs import *
 
 
 class ETHUCYClips(dataset.VideoClip):
 
     SOURCE_FILE = './ethucy/{}/true_pos_.csv'
+    OTHER_SOURCE_FILE_NAMES = {RGB_IMG: 'ref.png',
+                               SEG_IMG: 'seg.png'}
 
     def __init__(self, name: str, dataset: str, annpath: str = None,
                  order: tuple[int, int] = None, paras: tuple[int, int] = None,
