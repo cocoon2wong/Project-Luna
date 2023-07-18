@@ -2,7 +2,7 @@
 @Author: Conghao Wong
 @Date: 2022-08-01 18:45:05
 @LastEditors: Conghao Wong
-@LastEditTime: 2022-08-02 16:44:09
+@LastEditTime: 2023-07-18 19:09:58
 @Description: file content
 @Github: https://github.com/cocoon2wong
 @Copyright 2022 Conghao Wong, All Rights Reserved.
@@ -16,13 +16,14 @@ import py7zr
 from NBA.codes.Game import EventError, Game
 
 from .. import dataset
-from ..utils import dir_check, load_from_plist
+from ..utils import RGB_IMG, dir_check, load_from_plist
 from .configs import *
 
 
 class NBAClips(dataset.VideoClip):
 
     SOURCE_FILE = './NBA/metadata/{}.json'
+    other_files = {RGB_IMG: './videos/NBA_court.png'}
 
     def __init__(self, name: str, dataset: str, annpath: str = None,
                  order: tuple[int, int] = None, paras: tuple[int, int] = None,
@@ -92,11 +93,17 @@ class NBAClips(dataset.VideoClip):
             if frame_id % (SAMPLE_STEP / FRAME_STEP) != 0:
                 continue
 
+            # Add players
             for player in moment.players:
                 name = event.player_ids_dict[player.id][0]
                 lines.append(line.format(frame_id, name,
                                          player.x/SCALE, player.y/SCALE,
                                          player.team.name))
+
+            # Add the ball
+            ball = moment.ball
+            lines.append(line.format(frame_id, 'Ball',
+                                     ball.x/SCALE, ball.y/SCALE, 'Ball'))
 
         with open(fname, 'w+') as f:
             f.writelines(lines)
