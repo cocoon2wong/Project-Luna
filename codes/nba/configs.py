@@ -2,14 +2,14 @@
 @Author: Conghao Wong
 @Date: 2022-08-01 18:44:59
 @LastEditors: Conghao Wong
-@LastEditTime: 2023-07-18 16:38:28
+@LastEditTime: 2023-10-13 09:45:29
 @Description: file content
 @Github: https://github.com/cocoon2wong
 @Copyright 2022 Conghao Wong, All Rights Reserved.
 """
 
 DATASET = 'NBA'
-TYPE = 'meter'
+TYPE = 'inch'
 SCALE = 1.0
 SCALE_VIS = 1.0
 DIMENSION = 2
