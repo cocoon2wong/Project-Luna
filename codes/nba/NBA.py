@@ -2,7 +2,7 @@
 @Author: Conghao Wong
 @Date: 2022-08-01 18:45:05
 @LastEditors: Conghao Wong
-@LastEditTime: 2023-07-18 19:09:58
+@LastEditTime: 2023-10-16 14:48:29
 @Description: file content
 @Github: https://github.com/cocoon2wong
 @Copyright 2022 Conghao Wong, All Rights Reserved.
@@ -170,19 +170,27 @@ class NBADataset(dataset.Dataset):
         return event_count, clip_names
 
     def add_clips(self, game_names_file: str, force_update=False):
+        if not force_update and os.path.exists(ALL_EVENTS_FILE):
+            print(f'Events file `{ALL_EVENTS_FILE}` exists. ' +
+                  'Stop making dataset files from original data.')
+
+            with open(ALL_EVENTS_FILE, 'r') as f:
+                lines = f.readlines()
+
+            self.clips = [self.VideoClipType(e.split(',')[0],
+                                             self.name,
+                                             datasetInfo=self).get(None)
+                          for e in lines]
+            return
 
         with open(game_names_file, 'r') as f:
             zip_names = f.readlines()
 
         game_names = [n.split(',')[0][:-3] for n in zip_names]
+        random.shuffle(game_names)
 
-        event_count = 0
         all_clip_names = []
-
-        for game_name in game_names:
-            if event_count > MAX_EVENT_NUMBER:
-                break
-
+        for game_name in game_names[:MAX_VISITED_GAMES]:
             zip_path = SOURCE_ZIP_FILE.format(game_name)
             json_path = SOURCE_FILE.format(game_name)
 
@@ -199,10 +207,8 @@ class NBADataset(dataset.Dataset):
                 except:
                     continue
 
-            newevent_count, clip_names = self.make_events(
-                json_path, force_update)
+            _, clip_names = self.make_events(json_path, force_update)
 
-            event_count += newevent_count
             all_clip_names += clip_names
 
         with open(ALL_EVENTS_FILE, 'w+') as f:
@@ -210,9 +216,11 @@ class NBADataset(dataset.Dataset):
 
     def get_splits(self):
         """
-        Split from Simaug
+        50K (about) trajectories in total, 65% for training.
         """
-        event_names = [clip.name for clip in self.clips]
+        random.shuffle(self.clips)
+        event_names = [clip.name for clip in self.clips[:MAX_EVENT_NUMBER]]
+
         random.shuffle(event_names)
         train_number = int(TRAIN_PERCENT * len(event_names))
         val_number = int(VAL_PERCENT * (len(event_names) - train_number))

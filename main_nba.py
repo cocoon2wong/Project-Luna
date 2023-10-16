@@ -1,8 +1,8 @@
 """
 @Author: Conghao Wong
 @Date: 2023-07-18 15:40:17
-@LastEditors: Beihao Xia
-@LastEditTime: 2023-07-18 19:20:47
+@LastEditors: Conghao Wong
+@LastEditTime: 2023-10-16 10:57:40
 @Description: file content
 @Github: https://cocoon2wong.github.io
 @Copyright 2023 Conghao Wong, All Rights Reserved.
@@ -23,7 +23,7 @@ them put all of them into (please make the folder manually)
 if __name__ == '__main__':
     ds = nba.NBADataset()
     gamenames = './NBA/gamenames.lst'  # ds.get_game_names()
-    ds.add_clips(gamenames, force_update=True)
+    ds.add_clips(gamenames)
     ds.save_clips_info()
     ds.save_splits_info()
     
