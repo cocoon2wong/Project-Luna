@@ -2,7 +2,7 @@
 @Author: Conghao Wong
 @Date: 2022-08-01 18:44:59
 @LastEditors: Conghao Wong
-@LastEditTime: 2023-10-16 14:54:44
+@LastEditTime: 2023-10-16 15:13:08
 @Description: file content
 @Github: https://github.com/cocoon2wong
 @Copyright 2022 Conghao Wong, All Rights Reserved.
@@ -26,7 +26,7 @@ CLIP_CONFIG = dict(
 # only for NBA dataset
 DATASET_DIR = './NBA/metadata'
 ALL_RANDOM_GAMES_FILE = './NBA/gamenames.lst'
-ALL_EVENTS_FILE = './NBA/events.lst'
+ALL_EVENTS_FILE_NAME = 'events.lst'
 SOURCE_FILE = './NBA/metadata/{}.json'
 SOURCE_ZIP_FILE = './NBA/metadata/{}.7z'
 
