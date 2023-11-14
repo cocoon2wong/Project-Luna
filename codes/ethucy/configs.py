@@ -25,7 +25,7 @@ CLIP_CONFIGS['eth'] = dict(
     order=[1, 0],
     paras=[6, 25],
     video_path='./videos/eth.mp4',
-    weights=[17.667, 190.19, 10.338, 225.89],
+    weights=[17.667, 190.19, 23, 200],
 )
 
 CLIP_CONFIGS['hotel'] = dict(
