@@ -2,7 +2,7 @@
 @Author: Conghao Wong
 @Date: 2022-08-01 18:45:05
 @LastEditors: Conghao Wong
-@LastEditTime: 2023-10-16 16:17:51
+@LastEditTime: 2023-11-14 10:10:36
 @Description: file content
 @Github: https://github.com/cocoon2wong
 @Copyright 2022 Conghao Wong, All Rights Reserved.
@@ -14,6 +14,7 @@ import random
 import py7zr
 from tqdm import tqdm
 
+from NBA.codes.Constant import Constant
 from NBA.codes.Game import EventError, Game
 
 from .. import dataset
@@ -94,17 +95,25 @@ class NBAClips(dataset.VideoClip):
             if frame_id % (SAMPLE_STEP / FRAME_STEP) != 0:
                 continue
 
+            # Get the ball's position
+            ball = moment.ball
+
+            # Check if the ball is out of the court
+            if ((ball.x < 0) or
+                (ball.y < 0) or
+                (ball.x > Constant.X_MAX - Constant.DIFF) or
+                    (ball.y > Constant.Y_MAX)):
+                continue
+
+            lines.append(line.format(frame_id, 'Ball',
+                                     ball.x/SCALE, ball.y/SCALE, 'Ball'))
+
             # Add players
             for player in moment.players:
                 name = event.player_ids_dict[player.id][0]
                 lines.append(line.format(frame_id, name,
                                          player.x/SCALE, player.y/SCALE,
                                          player.team.name))
-
-            # Add the ball
-            ball = moment.ball
-            lines.append(line.format(frame_id, 'Ball',
-                                     ball.x/SCALE, ball.y/SCALE, 'Ball'))
 
         with open(fname, 'w+') as f:
             f.writelines(lines)
@@ -158,9 +167,6 @@ class NBADataset(dataset.Dataset):
         game_name = game.game_name
         event_number = game.last_default_index
 
-        if not game_name in self.games.keys():
-            self.games[game_name] = game
-
         valid_event_names = []
         for event_id in range(event_number):
             game.update(event_id)
@@ -211,6 +217,7 @@ class NBADataset(dataset.Dataset):
             all_event_names += event_names
 
         with open(self.event_list_file, 'w+') as f:
+            random.shuffle(all_event_names)
             f.writelines([c + ',\n' for c in all_event_names])
 
         return all_event_names
@@ -229,18 +236,14 @@ class NBADataset(dataset.Dataset):
             print('Start sampling games ...')
             event_names = self.get_all_event_names(game_names_file)
 
-        random.shuffle(event_names)
         for event_name in event_names[:MAX_EVENT_NUMBER]:
-            vc = self.VideoClipType(event_name,
-                                    dataset=self.name,
-                                    datasetInfo=self)
+            vc: NBAClips = self.VideoClipType(event_name,
+                                              dataset=self.name,
+                                              datasetInfo=self)
             vc.force_update = force_update
 
             game_name = vc.game_id
-            if not game_name in self.games.keys():
-                self.games[game_name] = Game(SOURCE_FILE.format(game_name))
-
-            if vc.get(self.games[game_name]):
+            if vc.get(Game(SOURCE_FILE.format(game_name))):
                 self.clips.append(vc)
 
     def get_splits(self):
