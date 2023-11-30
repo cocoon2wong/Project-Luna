@@ -2,7 +2,7 @@
 @Author: Conghao Wong
 @Date: 2022-08-01 17:35:49
 @LastEditors: Conghao Wong
-@LastEditTime: 2022-08-31 11:02:18
+@LastEditTime: 2023-11-30 16:14:01
 @Description: file content
 @Github: https://github.com/cocoon2wong
 @Copyright 2022 Conghao Wong, All Rights Reserved.
@@ -13,12 +13,15 @@ import re
 import numpy as np
 
 from .. import dataset
+from ..utils import RGB_IMG, SEG_IMG
 from .configs import *
 
 
 class SDDClips(dataset.VideoClip):
 
     SOURCE_FILE = './sdd/{}/video{}/annotations.txt'
+    OTHER_SOURCE_FILE_NAMES = {RGB_IMG: 'reference.jpg',
+                               SEG_IMG: 'segmentation.jpg'}
 
     def __init__(self, name: str, dataset: str, annpath: str = None,
                  order: tuple[int, int] = None, paras: tuple[int, int] = None,

@@ -2,7 +2,7 @@
 @Author: Conghao Wong
 @Date: 2022-08-01 15:42:08
 @LastEditors: Conghao Wong
-@LastEditTime: 2023-05-29 16:23:17
+@LastEditTime: 2023-11-30 16:03:33
 @Description: file content
 @Github: https://github.com/cocoon2wong
 @Copyright 2022 Conghao Wong, All Rights Reserved.
@@ -164,8 +164,12 @@ class VideoClip():
         for k in self.OTHER_SOURCE_FILE_NAMES.keys():
             source = self.OTHER_SOURCE_FILES[k]
             target = self.OTHER_TARGET_FILES[k]
-            shutil.copyfile(source, target)
-            print(f'Copy file `{source}` -> `{target}` done.')
+            
+            try:
+                shutil.copyfile(source, target)
+                print(f'Copy file `{source}` -> `{target}` done.')
+            except:
+                print(f'Failed to copy `{source}`, skip ...')
 
         self.__init__(**dic)
         return self
