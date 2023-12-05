@@ -2,7 +2,7 @@
 @Author: Conghao Wong
 @Date: 2022-08-01 18:44:59
 @LastEditors: Conghao Wong
-@LastEditTime: 2023-10-16 19:15:01
+@LastEditTime: 2023-12-05 15:04:39
 @Description: file content
 @Github: https://github.com/cocoon2wong
 @Copyright 2022 Conghao Wong, All Rights Reserved.
@@ -29,6 +29,12 @@ ALL_RANDOM_GAMES_FILE = './NBA/gamenames.lst'
 ALL_EVENTS_FILE_NAME = 'events.lst'
 SOURCE_FILE = './NBA/metadata/{}.json'
 SOURCE_ZIP_FILE = './NBA/metadata/{}.7z'
+
+# RGB image and segmentation map
+SOURCE_RGB_FILE = './NBA/court.png'
+SOURCE_SEG_FILE = './NBA/seg.png'
+TARGET_RGB_FILE = './dataset_processed/NBA/NBA_court.png'
+TARGET_SEG_FILE = './dataset_processed/NBA/NBA_seg.png'
 
 # Number of events (video clips) to make
 # This value only works for (obs, pred) = (5, 10)

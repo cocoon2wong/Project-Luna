@@ -2,7 +2,7 @@
 @Author: Conghao Wong
 @Date: 2022-08-01 18:45:05
 @LastEditors: Conghao Wong
-@LastEditTime: 2023-11-14 10:10:36
+@LastEditTime: 2023-12-05 15:48:55
 @Description: file content
 @Github: https://github.com/cocoon2wong
 @Copyright 2022 Conghao Wong, All Rights Reserved.
@@ -10,6 +10,7 @@
 
 import os
 import random
+import shutil
 
 import py7zr
 from tqdm import tqdm
@@ -18,14 +19,15 @@ from NBA.codes.Constant import Constant
 from NBA.codes.Game import EventError, Game
 
 from .. import dataset
-from ..utils import RGB_IMG, dir_check, load_from_plist
+from ..utils import RGB_IMG, SEG_IMG, dir_check, load_from_plist
 from .configs import *
 
 
 class NBAClips(dataset.VideoClip):
 
     SOURCE_FILE = './NBA/metadata/{}.json'
-    other_files = {RGB_IMG: './videos/NBA_court.png'}
+    other_files = {RGB_IMG: TARGET_RGB_FILE,
+                   SEG_IMG: TARGET_SEG_FILE}
 
     def __init__(self, name: str, dataset: str, annpath: str = None,
                  order: tuple[int, int] = None, paras: tuple[int, int] = None,
@@ -261,3 +263,7 @@ class NBADataset(dataset.Dataset):
         test_sets = event_names[train_number+val_number:]
 
         return [[train_sets, test_sets, val_sets, SPLIT_NAME]]
+
+    def copy_images(self):
+        shutil.copyfile(SOURCE_RGB_FILE, TARGET_RGB_FILE)
+        shutil.copyfile(SOURCE_SEG_FILE, TARGET_SEG_FILE)

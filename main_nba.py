@@ -26,4 +26,5 @@ if __name__ == '__main__':
     ds.add_clips(gamenames)
     ds.save_clips_info()
     ds.save_splits_info()
+    ds.copy_images()
     
