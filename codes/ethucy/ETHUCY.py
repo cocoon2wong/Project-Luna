@@ -2,7 +2,7 @@
 @Author: Conghao Wong
 @Date: 2022-08-01 16:05:26
 @LastEditors: Conghao Wong
-@LastEditTime: 2023-05-29 16:23:52
+@LastEditTime: 2024-03-07 09:58:59
 @Description: file content
 @Github: https://github.com/cocoon2wong
 @Copyright 2022 Conghao Wong, All Rights Reserved.
@@ -37,10 +37,11 @@ class ETHUCYClips(dataset.VideoClip):
 
         config = CLIP_CONFIGS[self.name]
         weights = [1.0, 0.0, 1.0, 0.0]
+        order = config['order']
 
         result = np.column_stack([
-            weights[0] * r.T[0] + weights[1],
-            weights[2] * r.T[1] + weights[3],
+            weights[0] * r.T[order[0]] + weights[1],
+            weights[2] * r.T[order[1]] + weights[3],
         ])/self.datasetInfo.scale
 
         dat = np.column_stack([data_original[0].astype(int).astype(str),
