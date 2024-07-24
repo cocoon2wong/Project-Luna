@@ -2,7 +2,7 @@
 @Author: Conghao Wong
 @Date: 2022-08-01 16:05:26
 @LastEditors: Conghao Wong
-@LastEditTime: 2024-03-07 09:58:59
+@LastEditTime: 2024-07-24 10:46:03
 @Description: file content
 @Github: https://github.com/cocoon2wong
 @Copyright 2022 Conghao Wong, All Rights Reserved.
@@ -95,5 +95,9 @@ class ETHUCYDataset(dataset.Dataset):
                     train_sets.append(d)
 
             splits.append([train_sets, test_sets, val_sets, ds])
+
+        # For the `univ` split
+        splits.append([['eth', 'hotel', 'unive', 'zara1', 'zara2', 'zara3'],
+                       ['univ', 'univ3'], ['univ', 'univ3'], 'univ13'])
 
         return splits
