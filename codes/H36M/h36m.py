@@ -2,7 +2,7 @@
 @Author: Conghao Wong
 @Date: 2023-04-24 10:16:19
 @LastEditors: Conghao Wong
-@LastEditTime: 2023-05-08 16:05:40
+@LastEditTime: 2024-08-05 11:36:54
 @Description: file content
 @Github: https://cocoon2wong.github.io
 @Copyright 2023 Conghao Wong, All Rights Reserved.
@@ -39,6 +39,7 @@ class H36MClips(dataset.VideoClip):
         scale = self.datasetInfo.scale
         indexes = USED_JOINT_3D_INDEXES
         frame_number = 0
+        agent_id = 0
 
         for source_file in self.source_files:
             with open(source_file, 'r') as f:
@@ -52,10 +53,11 @@ class H36MClips(dataset.VideoClip):
                         split = split[1:]
 
                     _dat = [float(split[index])/scale for index in indexes]
-                    dat.append([frame_number, self.subject] +
-                               _dat + ['Subject'])
+                    dat.append([frame_number, agent_id] +
+                               _dat + [f'Subject{self.subject}'])
 
                     frame_number += 1
+            agent_id += 1
 
         dat = np.array(dat, dtype=str)
         with open(self.TARGET_FILE, 'w+') as f:
