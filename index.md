@@ -1,8 +1,9 @@
 ---
-layout: pageWithLink
+layout: page
 title: Project-Luna 🌕
+add-md-links: true
 # subtitle: The basic setup steps to obtain dataset files used in this project
-# cover-img: /assets/img/2022-03-03/cat.jpeg
+cover-img: /subassets/img/homepage.png
 # tags: [guidelines]
 comments: true
 ---
@@ -10,7 +11,7 @@ comments: true
  * @Author: Conghao Wong
  * @Date: 2023-03-21 17:52:21
  * @LastEditors: Conghao Wong
- * @LastEditTime: 2023-04-26 16:43:00
+ * @LastEditTime: 2024-09-29 11:43:53
  * @Description: file content
  * @Github: https://cocoon2wong.github.io
  * Copyright 2023 Conghao Wong, All Rights Reserved.
@@ -20,10 +21,17 @@ comments: true
 
 ## Abstract
 
----
-
-A repository for codes that are used to transform files from different datasets into a format suitable for our trajectory prediction models' training.
+This repository is used to transform original files from different trajectory prediction datasets into a uniform format for our trajectory prediction models' training and  evaluation.
 The code for this repository needs to be used along with a specific model's code repository.
+It currently supports the following trajectory prediction models:
+
+<div style="text-align: center;">
+    <a class="btn btn-colorful btn-lg" href="https://github.com/cocoon2wong/E-Vertical">🔗 E-Vertical</a>
+    <a class="btn btn-colorful btn-lg" href="https://github.com/cocoon2wong/SocialCircle">🔗 SocialCircle</a>
+    <a class="btn btn-colorful btn-lg" href="https://github.com/cocoon2wong/SocialCirclePlus">🔗 SocialCirclePlus</a>
+    <br><br>
+</div>
+
 Click on the guidelines button below to learn how to transform dataset files into the format needed for our training code.
 
 <div style="text-align: center;">

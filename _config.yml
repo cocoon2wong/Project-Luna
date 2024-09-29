@@ -13,7 +13,7 @@
 title: "Project Unpredictable: Project-Luna"
 
 # Your name to show in the footer
-author: Copyright ©️ Beihao Xia & Conghao Wong
+author: Copyright ©️ Team Unpredictable
 
 ###############################################
 # --- List of links in the navigation bar --- #
@@ -26,6 +26,7 @@ navbar-links:
   GitHub:
     - Beihao Xia: "https://github.com/northocean"
     - Conghao Wong: "https://github.com/cocoon2wong"
+    - Ziqian Zou: "https://github.com/LivepoolQ"
 
 ################
 # --- Logo --- #
@@ -127,6 +128,7 @@ navbar-var-length: false
 # Personalize the colours in your website. Colour values can be any valid CSS colour
 
 navbar-col: "#46269C"
+navbar-float-col: "rgba(70, 70, 70, 0.599)"
 navbar-text-col: "#EBEBEB"
 navbar-border-col: "#DDDDDD"
 page-col: "#FFFFFF"
@@ -137,6 +139,12 @@ footer-col: "#EAEAEA"
 footer-text-col: "#777777"
 footer-link-col: "#404040"
 footer-hover-col: "#0085A1"
+
+# Button colors
+button-hover-color: "#6646aC"
+button-hover-text-color: "#FFFFFF"
+button-active-color: "#46269C"
+button-active-text-color: "#FFFFFF"
 
 
 # Alternatively, the navbar, footer, and page background can be set to an image
@@ -284,6 +292,7 @@ exclude:
   - README.md
   - screenshot.png
   - docs/
+  - Project-Zero/
 
 plugins:
   - jekyll-paginate
