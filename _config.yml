@@ -21,6 +21,10 @@ author: Copyright ©️ Team Unpredictable
 
 navbar-links:
   Home: "/index"
+  How To Use:
+    - Transform Dataset Files: "/howToUse"
+    - File Formats & Validate on Your Own Datasets: "/formats"
+    - Dataset & Splits Notes: "/notes"
   GitHub Repo: "https://github.com/cocoon2wong/Project-Luna"
   Project Unpredictable: "https://cocoon2wong.github.io/index"
   GitHub:

@@ -1,14 +1,14 @@
 ---
 layout: page
 add-md-links: true
-title: Steps to Initialize Dataset Files
+title: Transform Dataset Files
 # cover-img: /assets/img/2022-03-03/cat.jpeg
 ---
 <!--
  * @Author: Conghao Wong
  * @Date: 2023-03-21 17:52:21
  * @LastEditors: Conghao Wong
- * @LastEditTime: 2024-10-08 11:32:47
+ * @LastEditTime: 2024-10-08 16:42:15
  * @Description: file content
  * @Github: https://cocoon2wong.github.io
  * Copyright 2023 Conghao Wong, All Rights Reserved.
@@ -77,7 +77,7 @@ Then, run the following command to finish transforming:
 python main_nuscenes.py
 ```
 
-### (c) NBA
+### (c) NBA SportVU
 
 Developers of the NBA dataset have also provided their original codes, which we have forked as [https://github.com/cocoon2wong/NBA-Player-Movements](https://github.com/cocoon2wong/NBA-Player-Movements) and made into a `submodule`.
 
@@ -105,8 +105,6 @@ python main_h36m.py
 
 ## Step 3: Create Soft Links
 
----
-
 Run the following commands to create soft links so that the created files can be read directly by the training codes.
 Before running, make sure that you are now in the **dataset repo** inside the **code repo**.
 
@@ -116,17 +114,18 @@ ln -s dataset_original/dataset_processed ./
 ln -s dataset_original/dataset_configs ./
 ```
 
-## Step 4: Check the Linked Files
+Here, `dataset_original` is the default name of this **dataset repo** that plays as a `submodule` in some **code repo**.
+If you have cloned this **dataset repo** manually, please change the corresponding paths to make sure that the `source path` of the soft link points to the `dataset_processed` and the `dataset_configs` folders inside the **dataset repo**, and the `target path` of the soft link points to the **code repo**.
 
----
+## Step 4: Check the Linked Files
 
 After running all the above commands, your **code repo** should contain these folders:
 
-```
+```xml
 / (Code repo's root path)
 |____...
 |____dataset_configs
-|____dataset_original
+|____dataset_original (Optional)
 |____dataset_processed
 |____...
 ```
