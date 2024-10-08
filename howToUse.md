@@ -1,5 +1,6 @@
 ---
-layout: pageWithLink
+layout: page
+add-md-links: true
 title: Steps to Initialize Dataset Files
 # cover-img: /assets/img/2022-03-03/cat.jpeg
 ---
@@ -7,62 +8,55 @@ title: Steps to Initialize Dataset Files
  * @Author: Conghao Wong
  * @Date: 2023-03-21 17:52:21
  * @LastEditors: Conghao Wong
- * @LastEditTime: 2023-04-26 17:08:14
+ * @LastEditTime: 2024-10-08 11:32:47
  * @Description: file content
  * @Github: https://cocoon2wong.github.io
  * Copyright 2023 Conghao Wong, All Rights Reserved.
 -->
 
-Since the code in this repository does not contain dataset files, you need to execute some of the following commands before you run the code for the first time, otherwise the program will not run correctly.
-These commands only need to be executed once for each **code repo**.
+## Abstract
 
-{: .box-warning}
-**Warning:** This *dataset repo* plays as a `submodule` in the prediction model's *code repo*.
-Before executing the operations, make sure you have navigated to the correct repo's folder.
+This dataset repository acts as a submodule within the prediction model's code repository.
+Since it doesn't include our processed dataset files, you'll need to run these commands before using any of our trajectory prediction model's code repositories.
+These commands should only be executed once for each code repository.
+Before running the operations, make sure you're in the correct repository folder.
 
 ## Step 1: Initialize the dataset repo
 
----
+You can run the following commands to initializ this dataset repo in any of our code repos.
+After initializing, navigate to the root path of the **dataset repo**.
 
-As this repository contains only codes, you may need to download the original dataset files first.
-
-1. If you have cloned the **code repository** with `git clone` command, you can initialize the dataset files in the **code repo** by the following command:
-
-    ```bash
-    git submodule update --init --recursive
-    ```
-
-2. Or you can just [download](https://github.com/cocoon2wong/Project-Luna) this **dataset repo**, rename it into `dataset_original` and put it into the root path of the **code repo**.
-    (For example, `Vertial/dataset_original`.)
-    After downloading, you still need to initialize the dataset repo by running
+1. If you have cloned the **code repository** with `git clone` command, you can initialize this dataset repo in the **code repo** (for example, E-Vertical, SocialCircle) by the following command:
 
     ```bash
     git submodule update --init --recursive
+    cd dataset_original
     ```
 
-After initializing, navigate to the root path of the **dataset repo** from the **code repo**:
+2. Or you can clone  this **dataset repo** separately, and put it into any paths:
 
-```bash
-cd dataset_original
-```
+    ```bash
+    git clone https://github.com/cocoon2wong/Project-Luna.git
+    cd Project-Luna
+    ```
+
+Make sure that you are now in the **dataset repo**.
 
 ## Step 2: Transform Dataset Files
 
----
-
-Different researchers have built different read and use APIs for different datasets.
-In order for these different dataset files to be used in our training structure, you need to run the following commands to transform them.
+Researchers have created various data formats and APIs for users to train or test models on their proposed datasets.
+To make these dataset files compatible with our training structure, you'll need to run these commands.
 
 {: .box-warning}
-**Warning:** Make sure you have navigated to the root path of the **dataset repo** inside the **code repo** before running the following steps.
+**⚠️ Warning:** Make sure you have navigated to the root path of this **dataset repo** before running the following steps.
 
 {: .box-note}
-**Note:** For dataset split and settings, please refer to [HERE](../notes).
+**ℹ️ Note:** For the settings and details about datasets and splits, please refer to [this page](../notes).
 
 ### (a) ETH-UCY and SDD
 
-Dataset files of ETH-UCY benchmark and Stanford Drone Dataset have been uploaded to our [dataset repo](https://github.com/cocoon2wong/Project-Luna).
-You can run the following command to transform them easily:
+Dataset files of ETH-UCY benchmark and Stanford Drone Dataset have been uploaded to this dataset repo in `./ethucy` and `./sdd`.
+You can run the following command to transform them into our new format:
 
 ```bash
 python main_ethucysdd.py
@@ -70,13 +64,14 @@ python main_ethucysdd.py
 
 ### (b) nuScenes
 
-Researchers of the nuScenes dataset have provide a complete set of python user interfaces for using their dataset files.
-Due to the file size limit, you may need to first head over to [their home page](https://nuscenes.org/nuscenes) to download the full dataset file (full dataset, v1.0).
+Developers of the nuScenes dataset have provided a complete set of Python user interfaces for using their dataset files.
+We have include their original codes (forked as [https://github.com/cocoon2wong/nuscenes-devkit](https://github.com/cocoon2wong/nuscenes-devkit)) as a `submodule` in this repo.
+Due to the file size limitations and copyright reasons, you may need to first head over to [their home page](https://nuscenes.org/nuscenes) to download the full dataset file (full dataset, v1.0).
 
-After downloading, please unzip the file and place the two folders inside, including `v1.0-trainval` and `maps`, into `nuscenes-devkit/data/sets/nuscenes/`.
+After downloading, please unzip the file and place the two folders inside into this **dataset repo**, including `v1.0-trainval` and `maps`, into `./nuscenes-devkit/data/sets/nuscenes/`.
 (If the folder does not exist, please create them accordingly.)
 
-Then, run the following command to finish transforming.
+Then, run the following command to finish transforming:
 
 ```bash
 python main_nuscenes.py
@@ -84,8 +79,17 @@ python main_nuscenes.py
 
 ### (c) NBA
 
-{: .box-note}
-**Note:** Although we have wrote the code, these codes are currently unverified and may contain unknown errors, so we do not provide a corresponding conversion script.
+Developers of the NBA dataset have also provided their original codes, which we have forked as [https://github.com/cocoon2wong/NBA-Player-Movements](https://github.com/cocoon2wong/NBA-Player-Movements) and made into a `submodule`.
+
+Due to the size limitations and copyright reasons, we have omitted these original dataset files.
+Before making the transformed NBA dataset files, you need to download their original
+dataset files (636 `7z` files in total from their original repo [https://github.com/linouk23/NBA-Player-Movements](https://github.com/linouk23/NBA-Player-Movements) in the `data` directory, like `10.30.2015.UTA.at.PHI`), then put all of them into `dataset_original/NBA/metadata` (please create the folders manually).
+
+Then, run the following command to finish transforming:
+
+```bash
+python main_nba.py
+```
 
 ### (d) Human3.6M
 
