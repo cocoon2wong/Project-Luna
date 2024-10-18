@@ -26,4 +26,4 @@ CLIP_CONFIG = dict(
 DATAROOT = './nuscenes-devkit/data/sets/nuscenes'
 AGENT_IDLENGTH = 6
 EGO_AGENT_TYPE = 'vehicle.ego_vehicle'
-VAL_RATIO = 0.15
+VAL_RATIO = 0.215
