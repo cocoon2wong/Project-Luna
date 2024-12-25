@@ -34,11 +34,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Build publication and repo pages
-        run: |
-          python scripts/update_repos.py
-          python scripts/update_publications.py
-
       - name: Delete softlink files
         run: |
           rm ./_data
