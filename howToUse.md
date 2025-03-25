@@ -1,6 +1,6 @@
 ---
 layout: page
-add-md-links: true
+table-of-contents: true
 title: Transform Dataset Files
 # cover-img: /assets/img/2022-03-03/cat.jpeg
 ---
@@ -8,7 +8,7 @@ title: Transform Dataset Files
  * @Author: Conghao Wong
  * @Date: 2023-03-21 17:52:21
  * @LastEditors: Conghao Wong
- * @LastEditTime: 2024-10-08 16:42:15
+ * @LastEditTime: 2025-03-25 14:34:54
  * @Description: file content
  * @Github: https://cocoon2wong.github.io
  * Copyright 2023 Conghao Wong, All Rights Reserved.
@@ -47,11 +47,11 @@ Make sure that you are now in the **dataset repo**.
 Researchers have created various data formats and APIs for users to train or test models on their proposed datasets.
 To make these dataset files compatible with our training structure, you'll need to run these commands.
 
-{: .box-warning}
-**⚠️ Warning:** Make sure you have navigated to the root path of this **dataset repo** before running the following steps.
+> [!WARNING]
+> Make sure you have navigated to the root path of this **dataset repo** before running the following steps.
 
-{: .box-note}
-**ℹ️ Note:** For the settings and details about datasets and splits, please refer to [this page](../notes).
+> [!NOTE]
+> For the settings and details about datasets and splits, please refer to [this page](../notes).
 
 ### (a) ETH-UCY and SDD
 

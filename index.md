@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Project-Luna 🌕
-# add-md-links: true
+# table-of-contents: true
 # subtitle: The basic setup steps to obtain dataset files used in this project
 cover-img: /subassets/img/homepage.png
 # tags: [guidelines]
@@ -67,7 +67,7 @@ The following datasets are supported to train or test our trajectory prediction 
   - 3D Human Skeleton (17 Points);
 - *TBA*...
 
-### References
+---
 
 1. S. Pellegrini, A. Ess, K. Schindler, and L. Van Gool, “You’ll never walk alone: Modeling social behavior for multi-target tracking,” in 2009 IEEE 12th International Conference on Computer Vision. IEEE, 2009, pp. 261–268.
 2. A. Lerner, Y. Chrysanthou, and D. Lischinski, “Crowds by example,” Computer Graphics Forum, vol. 26, no. 3, pp. 655–664, 2007.
@@ -78,4 +78,3 @@ The following datasets are supported to train or test our trajectory prediction 
 7. C. S. Catalin Ionescu, Fuxin Li, “Latent structured models for human pose estimation,” in International Conference on Computer Vision, 2011.
 
 <div style="text-align: center">🌕🌕🌕</div>
-

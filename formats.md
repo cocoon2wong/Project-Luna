@@ -1,13 +1,13 @@
 ---
 layout: page
-add-md-links: true
+table-of-contents: true
 title: File Formats & Validate on Your Own Datasets
 ---
 <!--
  * @Author: Conghao Wong
  * @Date: 2024-10-08 15:22:35
  * @LastEditors: Conghao Wong
- * @LastEditTime: 2024-10-08 16:33:04
+ * @LastEditTime: 2025-03-25 14:35:24
  * @Github: https://cocoon2wong.github.io
  * Copyright 2024 Conghao Wong, All Rights Reserved.
 -->
@@ -57,9 +57,9 @@ The config file of a dataset split contains a `dict` that includes the following
 - **type**, type=`string`: Annotation type; (It is now unused.)
 - **val**, type=`array`: An array of clips to validate the model when training.
 
-{: .box-note}
-**Note:** Due to differences in settings, validation sets may not be included in the split of some datasets.
-When creating data config files, validation sets are still needed, even though they may be the same as the test set.
+> [!NOTE]
+> Due to differences in settings, validation sets may not be included in the split of some datasets.
+> When creating data config files, validation sets are still needed, even though they may be the same as the test set.
 
 You can take the config file of the **split** (NOT *clip*) `eth.plist` in dataset `ETH-UCY` as an example:
 
