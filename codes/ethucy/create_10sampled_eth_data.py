@@ -2,7 +2,7 @@
 @Author: Conghao Wong
 @Date: 2025-05-13 15:58:04
 @LastEditors: Conghao Wong
-@LastEditTime: 2025-05-14 16:19:53
+@LastEditTime: 2025-05-19 15:25:46
 @Github: https://cocoon2wong.github.io
 @Copyright 2025 Conghao Wong, All Rights Reserved.
 """
@@ -11,19 +11,24 @@ import os
 import shutil
 
 import numpy as np
-import scipy.interpolate
+from scipy.interpolate import interp1d
 
-START_FRAME = None
 FRAME_INTERVAL = 10
 SAMPLE_INTERVAL = 2
-DATA_SCALE = 2
 
 ANN_FILE = 'ann.csv'
-DATA_FOLDER = './dataset_processed/ETH-UCY/{}'
-SPLIT_CONFIG_FILE = './dataset_configs/ETH-UCY/{}.plist'
-CLIP_CONFIG_FILE = './dataset_configs/ETH-UCY/subsets/{}.plist'
+
+DATA_FOLDER_OLD = './dataset_processed/ETH-UCY/{}'
+DATA_FOLDER_NEW = './dataset_processed/ETH-UCY-eth10/{}'
+
+SPLIT_CONFIG_FILE_OLD = './dataset_configs/ETH-UCY/{}.plist'
+SPLIT_CONFIG_FILE_NEW = './dataset_configs/ETH-UCY-eth10/{}.plist'
+
+CLIP_CONFIG_FILE_OLD = './dataset_configs/ETH-UCY/subsets/{}.plist'
+CLIP_CONFIG_FILE_NEW = './dataset_configs/ETH-UCY-eth10/subsets/{}.plist'
 
 CLIPS = ['eth', 'hotel', 'univ3', 'unive', 'univ', 'zara1', 'zara2', 'zara3']
+CLIPS_COE = [1.0, 1.0, 2.0, 2.0, 2.0, 1.5, 1.5, 1.5]
 
 
 def dir_check(target_dir: str) -> str:
@@ -33,16 +38,16 @@ def dir_check(target_dir: str) -> str:
 
 
 def process_dataset_files(clip: str):
-    old_folder = DATA_FOLDER.format(clip)
-    new_folder = DATA_FOLDER.format(clip + '10')
+    old_folder = DATA_FOLDER_OLD.format(clip)
+    new_folder = DATA_FOLDER_NEW.format(clip + '10')
 
     # Balance data scales, since agents in eth move rather faster
-    # Coordinates in all other training sets are * 2
-    coe = 1.0 if clip == 'eth' else DATA_SCALE
+    coe = CLIPS_COE[CLIPS.index(clip)]
 
     with open(os.path.join(old_folder, ANN_FILE), 'r') as f:
         lines = f.readlines()
 
+    start_frame = -1
     agent_pos: dict[str, tuple[list, list]] = {}
 
     # Read all records
@@ -54,9 +59,8 @@ def process_dataset_files(clip: str):
         _y = float(_data[3]) * coe
         _type = _data[4]
 
-        global START_FRAME
-        if START_FRAME is None:
-            START_FRAME = _frame
+        if start_frame == -1:
+            start_frame = _frame
 
         if _id not in agent_pos.keys():
             agent_pos[_id] = ([], [])
@@ -72,21 +76,19 @@ def process_dataset_files(clip: str):
         _xs = _pos[:, 0]
         _ys = _pos[:, 1]
 
-        _new_start = START_FRAME + \
+        _new_start = start_frame + \
             FRAME_INTERVAL * \
-            int(np.floor((_frames[0] - START_FRAME) / FRAME_INTERVAL))
-        _new_end = START_FRAME + \
+            int(np.floor((_frames[0] - start_frame) / FRAME_INTERVAL))
+        _new_end = start_frame + \
             FRAME_INTERVAL * \
-            int(np.ceil((_frames[-1] - START_FRAME) / FRAME_INTERVAL))
+            int(np.ceil((_frames[-1] - start_frame) / FRAME_INTERVAL))
 
         # `SAMPLE_INTERVAL` are used to interpolate more training data
         # It should be used with `--step` arg when training
         # This arg is not currently used and is reserved for future usages
         _new_frames = np.arange(_new_start, _new_end + 1, SAMPLE_INTERVAL)
-        _fx = scipy.interpolate.interp1d(
-            _frames, _xs, fill_value='extrapolate')
-        _fy = scipy.interpolate.interp1d(
-            _frames, _ys, fill_value='extrapolate')
+        _fx = interp1d(_frames, _xs, fill_value='extrapolate')
+        _fy = interp1d(_frames, _ys, fill_value='extrapolate')
 
         _new_xs = _fx(_new_frames)
         _new_ys = _fy(_new_frames)
@@ -107,14 +109,15 @@ def process_dataset_files(clip: str):
     for file_name in os.listdir(old_folder):
         if ((file_name != ANN_FILE) and
                 (not file_name.startswith('.'))):
+            dir_check(new_folder)
             shutil.copyfile(source := os.path.join(old_folder, file_name),
                             target := os.path.join(new_folder, file_name))
             print(f'Copy file `{source}` -> `{target}` done.')
 
 
 def process_clip_config_file(clip: str):
-    old_clip_file = CLIP_CONFIG_FILE.format(clip)
-    new_clip_file = CLIP_CONFIG_FILE.format(clip + '10')
+    old_clip_file = CLIP_CONFIG_FILE_OLD.format(clip)
+    new_clip_file = CLIP_CONFIG_FILE_NEW.format(clip + '10')
 
     # Process the clip file
     with open(old_clip_file, 'r') as f:
@@ -125,19 +128,21 @@ def process_clip_config_file(clip: str):
 
     old_clip_lines = old_clip_lines.replace(clip, clip + '10')
     old_clip_lines = old_clip_lines.replace(f'{clip}10.mp4', f'{clip}.mp4')
+    old_clip_lines = old_clip_lines.replace('ETH-UCY', 'ETH-UCY-eth10')
     old_clip_lines = old_clip_lines.replace(
         f'<integer>{old_interval}</integer>\n\t\t<integer>25</integer>',
         f'<integer>{SAMPLE_INTERVAL}</integer>\n\t\t<integer>25</integer>'
     )
 
+    dir_check(os.path.dirname(new_clip_file))
     with open(new_clip_file, 'w+') as f:
         f.write(old_clip_lines)
     print(f'`{new_clip_file}` saved.')
 
 
 def process_split_file(split_name: str):
-    old_split_file = SPLIT_CONFIG_FILE.format(split_name)
-    new_split_file = SPLIT_CONFIG_FILE.format(split_name + '10')
+    old_split_file = SPLIT_CONFIG_FILE_OLD.format(split_name)
+    new_split_file = SPLIT_CONFIG_FILE_NEW.format(split_name + '10')
 
     # Process the split file
     with open(old_split_file, 'r') as f:
@@ -145,14 +150,18 @@ def process_split_file(split_name: str):
         old_split_lines = ''.join(old_split_lines)
 
     for ds in CLIPS:
-        # FIXME: Skip the hotel set since there are unknown issues
-        # that lead to `nan` values when computing loss functions.
-        # It means that the new split still uses the original hotel data.
-        if ds == 'hotel':
-            continue
-
         old_split_lines = old_split_lines.replace(ds + '<', ds + '10<')
 
+    # FIXME: Skip the hotel set since there are unknown issues
+    # that lead to `nan` values when computing loss functions.
+    old_split_lines = old_split_lines.replace(
+        '<string>hotel10</string>',
+        '<!-- <string>hotel10</string> -->'
+    )
+
+    old_split_lines = old_split_lines.replace('ETH-UCY', 'ETH-UCY-eth10')
+
+    dir_check(os.path.dirname(new_split_file))
     with open(new_split_file, 'w+') as f:
         f.write(old_split_lines)
     print(f'`{new_split_file}` saved.')
